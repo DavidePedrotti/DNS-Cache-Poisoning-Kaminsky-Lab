@@ -4,6 +4,4 @@ options {
     dnssec-validation no;
     dnssec-enable no;
     listen-on-v6 { none; };
-    filter-aaaa-on-v4 yes;
-    filter-aaaa { any; };
 };

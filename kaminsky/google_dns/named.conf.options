@@ -8,8 +8,6 @@ options {
     allow-query { any; };
     allow-query-cache { any; };
     allow-recursion { any; };
-    filter-aaaa-on-v4 yes;
-    filter-aaaa { any; };
 
 	listen-on-v6 { none; };
 };
