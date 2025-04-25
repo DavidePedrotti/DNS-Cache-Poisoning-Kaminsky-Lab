@@ -1,0 +1,85 @@
+services:
+  attacker:
+    build: ./attacker
+    container_name: attacker
+    networks:
+      lab_net:
+        ipv4_address: 10.0.0.10
+    volumes:
+      - ./attacker:/src
+    tty: true
+    cap_add:
+      - ALL
+
+  attacker_server:
+    image: my_server_image
+    container_name: attacker_server
+    networks:
+      lab_net:
+        ipv4_address: 10.0.0.20
+    volumes:
+      - ./attacker_server:/src
+    tty: true
+    cap_add:
+      - ALL
+
+  original_server:
+    image: my_server_image
+    container_name: original_server
+    networks:
+      lab_net:
+        ipv4_address: 10.0.0.30
+    volumes:
+      - ./original_server:/src
+    tty: true
+    cap_add:
+      - ALL
+
+  recursive_dns:
+    image: my_dns_image
+    container_name: recursive_dns
+    ports:
+      - "5301:53/udp"
+      - "5302:12345/udp"
+    networks:
+      lab_net:
+        ipv4_address: 10.0.0.40
+    volumes:
+      - ./recursive_dns:/etc/bind
+    tty: true
+    cap_add:
+      - ALL
+
+  root_dns:
+    image: my_dns_image
+    container_name: root_dns
+    ports:
+      - "5303:53/udp"
+      - "5303:53/tcp"
+    networks:
+      lab_net:
+        ipv4_address: 10.0.0.50
+    volumes:
+      - ./root_dns:/etc/bind
+    tty: true
+    cap_add:
+      - ALL
+
+  victim:
+    build: ./victim
+    container_name: victim
+    networks:
+      lab_net:
+        ipv4_address: 10.0.0.60
+    tty: true
+    cap_add:
+      - ALL
+    dns:
+      - 10.0.0.40
+
+networks:
+  lab_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24

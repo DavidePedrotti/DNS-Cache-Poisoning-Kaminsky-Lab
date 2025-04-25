@@ -1,0 +1,21 @@
+options {
+	directory "/var/cache/bind";
+
+    forward only;
+    forwarders {
+        10.0.0.50;
+    };
+
+    dnssec-validation no;
+    dnssec-enable no;
+    dump-file "/var/cache/bind/dump.db";
+    query-source port 12345;
+
+    allow-query { any; };
+    allow-query-cache { any; };
+    allow-recursion { any; };
+
+	listen-on-v6 { any; };
+    send-cookie no;
+    require-server-cookie no;
+};
