@@ -9,5 +9,5 @@ $TTL 86400
 @        IN      NS      ns.com.
 ns.com.        IN      A       10.0.0.50
 
-google.com.     IN      NS      ns.google.com.
-ns.google.com.  IN      A       10.0.0.80
+google.com.     10      IN      NS      ns.google.com.
+ns.google.com.  10      IN      A       10.0.0.80

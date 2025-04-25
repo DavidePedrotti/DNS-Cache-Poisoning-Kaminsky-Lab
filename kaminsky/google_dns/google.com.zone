@@ -9,6 +9,6 @@ $TTL 86400
 
 @       IN      NS      ns.google.com.
 
-www       30      IN      A       10.0.0.30
-ns       30      IN      A       10.0.0.100
-*       30      IN      A       10.0.0.101
+www       10      IN      A       10.0.0.30
+ns       10      IN      A       10.0.0.100
+*       10      IN      A       10.0.0.101
