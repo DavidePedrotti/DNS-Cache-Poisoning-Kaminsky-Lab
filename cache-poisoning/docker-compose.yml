@@ -1,6 +1,6 @@
 services:
   attacker:
-    image: my_attacker_image
+    image: attacker_image
     container_name: attacker
     networks:
       lab_net:
@@ -12,7 +12,7 @@ services:
       - ALL
 
   attacker_server:
-    image: my_server_image
+    image: server_image
     container_name: attacker_server
     networks:
       lab_net:
@@ -24,7 +24,7 @@ services:
       - ALL
 
   original_server:
-    image: my_server_image
+    image: server_image
     container_name: original_server
     networks:
       lab_net:
@@ -35,9 +35,9 @@ services:
     cap_add:
       - ALL
 
-  recursive_dns:
-    image: my_dns_image
-    container_name: recursive_dns
+  recursive_ns:
+    image: ns_image
+    container_name: recursive_ns
     ports:
       - "5301:53/udp"
       - "5302:12345/udp"
@@ -45,14 +45,14 @@ services:
       lab_net:
         ipv4_address: 10.0.0.40
     volumes:
-      - ./recursive_dns:/etc/bind
+      - ./recursive_ns:/etc/bind
     tty: true
     cap_add:
       - ALL
 
-  root_dns:
-    image: my_dns_image
-    container_name: root_dns
+  root_ns:
+    image: ns_image
+    container_name: root_ns
     ports:
       - "5303:53/udp"
       - "5303:53/tcp"
@@ -60,13 +60,13 @@ services:
       lab_net:
         ipv4_address: 10.0.0.50
     volumes:
-      - ./root_dns:/etc/bind
+      - ./root_ns:/etc/bind
     tty: true
     cap_add:
       - ALL
 
   victim:
-    image: my_victim_image
+    image: victim_image
     container_name: victim
     networks:
       lab_net:

