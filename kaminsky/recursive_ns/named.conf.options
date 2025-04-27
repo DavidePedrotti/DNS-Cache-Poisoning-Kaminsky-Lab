@@ -1,3 +1,8 @@
+acl "trusted" {
+    10.0.0.0/24;
+    localhost;
+};
+
 options {
 	directory "/var/cache/bind";
     recursion yes;
@@ -7,8 +12,8 @@ options {
     query-source port 12345;
 
     allow-query { any; };
-    allow-query-cache { any; };
-    allow-recursion { any; };
+    allow-query-cache { trusted; };
+    allow-recursion { trusted; };
 
     listen-on-v6 { none; };
     send-cookie no;

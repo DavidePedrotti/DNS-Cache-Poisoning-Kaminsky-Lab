@@ -1,10 +1,9 @@
 options {
-    directory "/var/cache/bind";
-    listen-on { any; };
+    directory "/var/cache/bind"; // set BIND's working directory
+    listen-on { any; }; // listen for DNS queries on all IPv4 interfaces
 
-    allow-query { any; };
-    allow-recursion { none; };
+    allow-query { any; }; // anyone is allowed to query the ns
+    allow-recursion { none; }; // disable recursive DNS queries
 
-    dnssec-validation no;
-    dnssec-enable no;
+    dnssec-validation no; // BIND will not check DNSSEC signatures
 };

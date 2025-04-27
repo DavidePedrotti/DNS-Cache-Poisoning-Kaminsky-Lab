@@ -1,5 +1,10 @@
+acl "trusted" {
+    10.0.0.0/24;
+    localhost;
+};
+
 options {
-	directory "/var/cache/bind";
+	directory "/var/cache/bind"; // set BIND's working directory
 
     forward only;
     forwarders {
@@ -7,12 +12,11 @@ options {
     };
 
     dnssec-validation no;
-    dnssec-enable no;
     query-source port 12345;
 
-    allow-query { any; };
-    allow-query-cache { any; };
-    allow-recursion { any; };
+    allow-query { any; }; // anyone is allowed to query the ns
+    allow-query-cache { trusted; }; // only trusted users can access the cache
+    allow-recursion { trusted; };
 
 	listen-on-v6 { none; };
     send-cookie no;
