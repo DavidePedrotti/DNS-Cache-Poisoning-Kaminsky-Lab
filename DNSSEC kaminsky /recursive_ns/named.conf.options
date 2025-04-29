@@ -1,0 +1,24 @@
+acl "trusted" {
+    10.0.0.0/24;
+    localhost;
+};
+
+options {
+	directory "/var/cache/bind";
+    recursion yes;
+
+    dnssec-validation auto;
+    query-source port 12345;
+
+    allow-query { any; };
+    allow-query-cache { trusted; };
+    allow-recursion { trusted; };
+
+    listen-on-v6 { none; };
+    send-cookie no;
+    require-server-cookie no;
+};
+
+trusted-keys {
+    com. 257 3 7 "AwEAAdW8bapl06dNYE0gpidXgWE1cj6sjYQud4GCo9bmP0XwPtj7Cdcr e7ti6TmllCKD5v0HIieMhwREKK911DRaIdX39v1IrSSyUZnK7wv6zCL4 hfuX+qOXlGMZ05jL0jlIARckfh46DE0dadxtZP5fhtBHniXBd3gjPzQa CSud88LYevIu49ZUOR/XRE1o/HhO1S01yrYSSkcwWtAA0Mt7Qzv/iqol 1w43MITWxum3pW4VWAK7ZtVFWVjIfKcRKIr1rMgH0/3YKu28u0bnlwsa M/QtAlqhgH5z3hBt2Y7+5G7xd+3+/kECtIza23Nf6moTWh26gD1fr7BQ 4ABBMFDx//64DryFw/pHS/XzN38uWkUUvjICekcGLaUngvOhyzHdx0wF D//Wso0SL9xK5m1w+bkMBbsXeDECFqeQDi/qHeo8JEVHzTaVoakRjX4L Icva/4c+92M5Jam3ysXzVKJd3s4pSNPBEClwgs+nVyc+ncSSv2oSntlI LcP5Ns0hCufmxZKPebb2U0Soo/3fv5Xs9VoqOcfsR7z5np8Tf/dtNL0h TzRnZ+4qYwbS4G6/oxlW2wYZfRv0jEbiNwTiohazHru8LzB6aYYyyyRY 1xOc4x5NbtfnZj5Tvtv432DHIVUCGVN2boeGLV3E+z6GXwCLJ2JHdjN8 fO9b0VZo5t+7G3Qp";
+};

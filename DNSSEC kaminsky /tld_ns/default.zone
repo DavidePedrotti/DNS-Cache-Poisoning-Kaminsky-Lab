@@ -1,0 +1,17 @@
+$TTL 86400
+
+@       IN      SOA     ns.com. admin.ns.com. (
+                        1         ; Serial
+                        604800    ; Refresh
+                        86400     ; Retry
+                        2419200   ; Expire
+                        86400)    ; Minimum TTL
+
+@        IN      NS      ns.com.
+ns.com.        IN      A       10.0.0.50
+
+google.com.     10      IN      NS      ns.google.com.
+ns.google.com.  10      IN      A       10.0.0.80
+google.com.		IN DS 31299 7 2 9FE89EF4BC57819350E74D79094E893296BF84982856D5608B79AEA3 30285CDA
+com. IN DNSKEY 256 3 7 AwEAAcGmyKHP1J9I4LmgmJFtfCxfSOKZqcrnPbrFIDzx7jt9fS7Tuuis FwYB55d+K0pLXpEaem1gRDX6mx01Yg2nmbB4vBvL/9pi3I+5POo9CAGO 7zVkrYuJDGCONHrKWRhBl8EZI09lTbWLLPpOj1TuxjIypSPQmwT7LyKC jWOOwMCkJcBdX8hpGBQvBKH2UMI3eE5ktfm67ZI4WJzYWgg2gAmb5G++ KxQZ6m7DqwbE4FpHyfRCGBsRg+xLueXoXEU7foQqt7hti9xXYguzNOV3 PYc8zE09YMahCvmLTcVZNpAIaPybs96j8ihU9rrCZZHe5VedOegJTQ90 0i+S5jzDVGs=
+com. IN DNSKEY 257 3 7 AwEAAdW8bapl06dNYE0gpidXgWE1cj6sjYQud4GCo9bmP0XwPtj7Cdcr e7ti6TmllCKD5v0HIieMhwREKK911DRaIdX39v1IrSSyUZnK7wv6zCL4 hfuX+qOXlGMZ05jL0jlIARckfh46DE0dadxtZP5fhtBHniXBd3gjPzQa CSud88LYevIu49ZUOR/XRE1o/HhO1S01yrYSSkcwWtAA0Mt7Qzv/iqol 1w43MITWxum3pW4VWAK7ZtVFWVjIfKcRKIr1rMgH0/3YKu28u0bnlwsa M/QtAlqhgH5z3hBt2Y7+5G7xd+3+/kECtIza23Nf6moTWh26gD1fr7BQ 4ABBMFDx//64DryFw/pHS/XzN38uWkUUvjICekcGLaUngvOhyzHdx0wF D//Wso0SL9xK5m1w+bkMBbsXeDECFqeQDi/qHeo8JEVHzTaVoakRjX4L Icva/4c+92M5Jam3ysXzVKJd3s4pSNPBEClwgs+nVyc+ncSSv2oSntlI LcP5Ns0hCufmxZKPebb2U0Soo/3fv5Xs9VoqOcfsR7z5np8Tf/dtNL0h TzRnZ+4qYwbS4G6/oxlW2wYZfRv0jEbiNwTiohazHru8LzB6aYYyyyRY 1xOc4x5NbtfnZj5Tvtv432DHIVUCGVN2boeGLV3E+z6GXwCLJ2JHdjN8 fO9b0VZo5t+7G3Qp
