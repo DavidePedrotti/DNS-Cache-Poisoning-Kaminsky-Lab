@@ -23,6 +23,6 @@ options {
     require-server-cookie no;
 };
 
-trusted-keys { \\ KSK key?
+trusted-keys {
     google.com. 257 3 7 "AwEAAazyyJx2f5EkQSe8pZ7gNfOfiG1zK69ej2sQ61X6n11eYy6+v4k/ 4wu40POZo6cw6J1AnZYTG5ZsRhOTzjGIS7e7S63T2DD62ovdeTp8Ula4 eLyx6VcfX8I0Q8NP3qCUpD1Wzw7vf696rGSIrsgVJqwZSHoFFtQRRO8s RpqYh/n9nTMaHfjxeCkhBYLDQkqWY0s4a+kV6DWJZOblQSzma4o/YME3 JaeTfXXdaEJ5AgEdVyx069CPRB7sLewGksaf8G9wb6MYn7k2fiA3cq6+ iFDzTvyZwtPLOvMBJmMK2G0V7qowUbBlqUdVzAQrW/fKlWzLDUM9Dbmb KOoX7IKCsb1fivK1uIl6rUcEa/JlOlYCgZaNST0M8h5XQDSiCuu3ZyR/ xok3nKxDNqQ9sWTpr9ishkCaZwqjYFj35kuXJJdT/PnDSs9oO+iaB0YX ubX83c1LkgEZ01OF+VClMafC4R0QkME22AhtIROa0S4ZBB3N60IpxLPk 9AcM4dUf9msWYjtCRiZpoGKWM8wJwL9JoQDaRy8GvTWInci/SLC+YXS7 SUC3NZmmI6f+c/GMXO24cXtkRyO6ZfpkkGsD+F0eG1Crlk8V0rKgf1+d DsKQS/9RxkUpF9dapuGivEQXxUaBe1uOcCJXDApLfUcbPp1dHKnAd4df /M7vghZapQ7wjA3L";
 };
