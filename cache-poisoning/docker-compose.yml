@@ -50,9 +50,9 @@ services:
     cap_add:
       - ALL
 
-  root_ns:
+  authoritative_ns:
     image: ns_image
-    container_name: root_ns
+    container_name: authoritative_ns
     ports:
       - "5303:53/udp"
       - "5303:53/tcp"
@@ -60,7 +60,7 @@ services:
       lab_net:
         ipv4_address: 10.0.0.50
     volumes:
-      - ./root_ns:/etc/bind
+      - ./authoritative_ns:/etc/bind
     tty: true
     cap_add:
       - ALL

