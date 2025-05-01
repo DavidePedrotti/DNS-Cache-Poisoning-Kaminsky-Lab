@@ -4,9 +4,8 @@ options {
 
     allow-query { any; }; // anyone is allowed to query the ns
     allow-recursion { none; }; // disable recursive DNS queries
-
-    // DNSSEC flags
-    dnssec-validation yes;
-    dnssec-enable yes;
     dnssec-lookaside auto;
+
+    dnssec-validation yes;
+    dnssec-enable yes;    
 };

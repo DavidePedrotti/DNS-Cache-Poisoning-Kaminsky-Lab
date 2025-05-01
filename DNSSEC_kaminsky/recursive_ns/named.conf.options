@@ -1,0 +1,24 @@
+acl "trusted" {
+    10.0.0.0/24;
+    localhost;
+};
+
+options {
+	directory "/var/cache/bind";
+    recursion yes;
+
+    dnssec-validation auto;
+    query-source port 12345;
+
+    allow-query { any; };
+    allow-query-cache { trusted; };
+    allow-recursion { trusted; };
+
+    listen-on-v6 { none; };
+    send-cookie no;
+    require-server-cookie no;
+};
+
+trusted-keys{
+    com. TODO TODO TODO "TODO";
+};

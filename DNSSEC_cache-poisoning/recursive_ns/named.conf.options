@@ -1,0 +1,28 @@
+acl "trusted" {
+    10.0.0.0/24;
+    localhost;
+};
+
+options {
+	directory "/var/cache/bind"; // set BIND's working directory
+
+    forward only;
+    forwarders {
+        10.0.0.50;
+    };
+
+    dnssec-validation TODO;
+    query-source port 12345;
+
+    allow-query { any; }; // anyone is allowed to query the ns
+    allow-query-cache { trusted; }; // only trusted users can access the cache
+    allow-recursion { trusted; };
+
+	listen-on-v6 { none; };
+    send-cookie no;
+    require-server-cookie no;
+};
+
+trusted-keys{
+    google.com TODO TODO TODO "TODO";
+};

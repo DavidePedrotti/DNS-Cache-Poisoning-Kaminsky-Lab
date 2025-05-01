@@ -11,7 +11,7 @@ options {
         10.0.0.50;
     };
 
-    dnssec-validation auto;
+    dnssec-validation yes;
     query-source port 12345;
 
     allow-query { any; }; // anyone is allowed to query the ns
