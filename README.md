@@ -1,5 +1,10 @@
 # DNS-Cache-Poisoning-Kaminsky-Lab
-Lab for Network Security
+This is a lab on DNS Cache Poisoning, Kaminsky Attack, and DNSSEC, made for the Network Security course at the University of Trento.
 
-Command to delay the legitimate responses:
-tc qdisc add dev eth0 root netem delay 1000ms;
+## Description
+
+The lab presents a report, which describes the attacks and the steps to reproduce them.
+
+## Authors
+
+- [Alessandro Fontana](https://github.com/MrAleFonta), [Davide Pedrotti](https://github.com/DavidePedrotti), [Lorenzo Masè](https://github.com/LorenzoMase)
